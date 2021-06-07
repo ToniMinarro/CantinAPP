@@ -1,0 +1,95 @@
+/*
+div {
+	padding: 0.3em;
+}
+
+td,li,option:hover {
+	cursor: pointer;
+}
+
+.navbar {
+	overflow: hidden;
+	background:  white;
+	position: fixed;
+	top: 0;
+	height: 20%;
+	width: 100%;
+	z-index: 10;
+}
+
+.navbar a {
+	float: left;
+	display: block;
+	color: black;
+	text-align: left;
+	padding: 1px 1.5px;
+	text-decoration: none;
+}
+
+.navbar a:hover {
+	background: #ddd;
+	color:black;
+}
+
+.panel {
+	/* border: 1px solid red; */ /*
+	width: 100%;
+	margin: 3em auto;	
+}
+
+.panel form {
+	padding: 0.5em 0.5em;
+}
+
+h1, h2 {
+	text-align: center;
+}
+
+#error-container {
+	display: inline;
+	bottom: 0px;
+	position: fixed;
+	/* width: 100%; */  /*
+}
+
+.list-group{
+	max-height: 19em;
+	overflow: scroll;
+	-webkit-overflow-scrolling: touch;
+}
+
+#insertarMenu > form > div.row > div:nth-child(2) {
+	top: 4.75em;
+}
+
+#contenido {
+	margin: 2em auto;
+}
+
+#navbar {
+	/* background-color: #333; */ /*
+	position: fixed;
+	top: 0;
+	width: 100%;
+	display: block;
+	transition: top 0.3s;
+}
+*/
+
+.scrolled-down {
+	transform:translateY(-100%); transition: all 0.3s ease-in-out;
+}
+
+.scrolled-up {
+	transform:translateY(0); transition: all 0.3s ease-in-out;
+}
+
+#messageDiv {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+#message {
+    margin: 0 auto;
+}
