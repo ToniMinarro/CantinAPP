@@ -20,4 +20,4 @@ El enfoque del proyecto es mediante el paradigma POO, para lo que se han creado 
 
 Además de esto, y como filosofía personal, adoptada en base al desarrollo en diferentes frameworks, cada clase contiene la definición de atributos, constructores, métodos, etc., además de la funcionalidad de comunicación directa con la BBDD a través de PDO.
 
-En este sentido, resulta muy sencillo instanciar una clase, pasarle la información que requiere para su construcción, y hacer la misma persistente empleando el mínimo esfuerzo:
+En este sentido, resulta muy sencillo instanciar una clase, pasarle la información que requiere para su construcción, y hacer la misma persistente empleando el mínimo esfuerzo.
