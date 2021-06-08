@@ -7,7 +7,7 @@ Se trata de una empresa con aproximadamente 450 trabajadores, de los cuales, la 
 Actualmente, tanto la gestión de los pedidos, como el cobro del servicio, es llevado de manera completamente independiente para cada trabajador o departamento, existiendo así departamentos muy organizados y que facilitan el servicio, y otros que prefieren su gestión individual. Es por esto, que queda justificado el desarrollo de este sistema, y enmarcado en el Módulo de Proyecto del ciclo formatico Desarrollo de Aplicaciones Web.
 
 
-                                                                    DESCRIPCIÓN DEL SISTEMA
+                                                            DESCRIPCIÓN DEL SISTEMA
 
 El sistema debe ser capaz de permitir a los usuarios (empleados) el manejo de sus pedidos, desde la creación de la manera más sencilla posible, hasta la modificación de la composición de sus pedidos.
 
