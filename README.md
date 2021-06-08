@@ -8,7 +8,7 @@ Actualmente, tanto la gestión de los pedidos, como el cobro del servicio, es ll
 
 
 
-                                                            DESCRIPCIÓN DEL SISTEMA
+DESCRIPCIÓN DEL SISTEMA
 
 
 El sistema debe ser capaz de permitir a los usuarios (empleados) el manejo de sus pedidos, desde la creación de la manera más sencilla posible, hasta la modificación de la composición de sus pedidos.
