@@ -3,7 +3,7 @@ const $$ = document.querySelectorAll.bind(document)
 // const INDICE = 'http://localhost/'; 				// PARA DEPLOY EN LOCAL
 const INDICE = 'http://rpi/CantinAPP/'; 					// PARA DEPLOY EN RASPBERRY PI
 // const INDICE = 'http://www.rpi.fsalzillo.com/'; 	// PARA DEPLOY EN LAN
-// const INDICE = 'http://cantinapp.duckdns.org/'; 	// PARA DEPLOY EN WAN
+// const INDICE = 'http://cantinapp.duckdns.org/CantinAPP/'; 	// PARA DEPLOY EN WAN
 
 /* DESCOMENTAR ESTAS LÍNEAS PARA URL ESTÁTICA */
 const CANTINA = INDICE + 'php/Cantina.php';
