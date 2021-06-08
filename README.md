@@ -10,6 +10,7 @@ Actualmente, tanto la gestión de los pedidos, como el cobro del servicio, es ll
 
                                                             DESCRIPCIÓN DEL SISTEMA
 
+
 El sistema debe ser capaz de permitir a los usuarios (empleados) el manejo de sus pedidos, desde la creación de la manera más sencilla posible, hasta la modificación de la composición de sus pedidos.
 
 Por otra parte, debe de permitir la gestión del servicio por parte del restaurante, principalmente la creación de menús diarios la gestión de la cola de pedidos.
