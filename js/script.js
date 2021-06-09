@@ -89,8 +89,6 @@ function ClickEnBotonera(bt, message = null, modifPedido, nuevoPedido, preOrder 
 		})
 		.then(function(data) {
 				$('#capaContenido').innerHTML = data;
-				// $('#message').innerHTML = message == null ? '' : data;
-				// if(message != null) { jQuery('#liveToast').toast('show'); }
 				AgregarEventos(bt);
 	
 		})
@@ -118,19 +116,20 @@ function AgregarEventos(bt) {
 					$('#btAgregaPedido').addEventListener("click", function(){ ModificarPedido($('#btAgregaPedido').dataset["pedido"], Array.from($('#nuevoPedido').options), $('#fechaServicio input').value, $('#horaServicio input').value); });
 					$('#fechaServicio input').value = $('#txtFechaServicio').value = FechaAhora();
 					$('#horaServicio input').value = $('#txtHoraServicio').value = HoraAhora();
-					ClickFilaMenu('tablaMenuHoy', 'nuevoPedido', true);
+					ClickFilaMenu('tablaMenuHoy', 'nuevoPedido');
 					EventoBorrarComposicion('nuevoPedido');
+					jQuery('select').on('change', function (e) { RecalculaPrecioPedido('nuevoPedido'); });
 					break;
 
 				case 'Realizar nuevo pedido':
 					if ($('#btVerMisPedidos') != null) { $('#btVerMisPedidos').addEventListener("click", e => { ClickEnBotonera(bt); }); }
-					totalPedido = 0;
 					$('#fechaServicio input').value = $('#txtFechaServicio').value = FechaAhora();
 					$('#horaServicio input').value = $('#txtHoraServicio').value = HoraAhora();
 					if ($('#btAgregaPedido') != null) { $('#btAgregaPedido').addEventListener("click", function(){ AgregarPedido(); }); }
 					else {  $('#btDoPreOrder').addEventListener("click", function(){ ModificarPedido($('#btDoPreOrder').dataset["pedido"], Array.from(($('#nuevoPedido').options)), $('#fechaServicio input').value, $('#horaServicio input').value); }); }
-					ClickFilaMenu('tablaMenuHoy', 'nuevoPedido', true);
+					ClickFilaMenu('tablaMenuHoy', 'nuevoPedido');
 					EventoBorrarComposicion('nuevoPedido');
+					jQuery('select').on('change', function (e) { RecalculaPrecioPedido('nuevoPedido'); });
 					break;
 			}
 			break;
@@ -142,7 +141,7 @@ function AgregarEventos(bt) {
 		case 'newMenu':
 			$('#fechaNuevoMenu input').value = $('#txtFechaNuevoMenu').value = FechaAhora();
 			$('#btAgregaMenu').addEventListener("click", function(){ AgregarMenu(); });
-			ClickFilaMenu('tablaComposicion', 'nuevoMenu', false);
+			ClickFilaMenu('tablaComposicion', 'nuevoMenu');
 			break;
 
 		case 'activeOrders':
@@ -219,7 +218,7 @@ function formUsuario(idForm) {
 	});
 }
 
-function ClickFilaMenu(idTabla, nombreLista, actualizaPrecio) {
+function ClickFilaMenu(idTabla, nombreLista) {
 	var table = jQuery('#' + idTabla).DataTable(
 		{
 			"lengthMenu": [ 6, 10, 50, 100 ],
@@ -239,18 +238,7 @@ function ClickFilaMenu(idTabla, nombreLista, actualizaPrecio) {
 			}
 		}
 	);
-	table.on('click', 'tbody tr', x => {
-		AgregarOptionLista(x.currentTarget, nombreLista);
-		
-		/*
-		if (actualizaPrecio) {
-			// var precio = x.currentTarget.children[0].dataset["precio"];
-			// var precioActual = $('#precioPedido').innerText.replace('€', '');
-			// ActualizaPrecioPedido(precio, precioActual);
-			RecalculaPrecioPedido(nombreLista);
-		}
-		*/
-    });
+	table.on('click', 'tbody tr', x => { AgregarOptionLista(x.currentTarget, nombreLista); });
 }
 
 function AgregarPedido(preOrder = false) {
@@ -258,12 +246,8 @@ function AgregarPedido(preOrder = false) {
 	var dataPost = new URLSearchParams();
 	for(let o of valores)
 	{
-		// if (preOrder)
-		// {
-			var check = preOrder ? o.lastChild.firstElementChild.checked : o.selected;
-			if (check) { dataPost.append("nuevoPedido[]", o.dataset["id"]); }
-		// }
-		// else { dataPost.append("nuevoPedido[]", o.dataset["id"]); }
+		var check = preOrder ? o.lastChild.firstElementChild.checked : o.selected;
+		if (check) { dataPost.append("nuevoPedido[]", o.dataset["id"]); }
 	}
 	dataPost.append("fechaServicio", preOrder ? FechaAhora() : $('#txtFechaServicio').value);
 	dataPost.append("horaServicio", preOrder ? HoraAhora() : $('#txtHoraServicio').value);
@@ -417,11 +401,8 @@ function FuncionLogoff()
 }
 
 function AgregarOptionLista(e, nombreLista) {
-	// var selector = "#" + nombreLista + " option";
-	// var selector = "#" + nombreLista;
 	var id = e.children[0].dataset["id"];
 	var value = e.children[0].dataset["precio"];
-	// if($(selector).innerHTML === '') { $(selector).remove($(selector).children[0]); }
 	var opcion = '<option style="cursor: pointer;" data-id=' + id + ' data-precio=' + value + ' name=' + nombreLista + '[] selected>' + e.firstElementChild.innerText + '</option>';
 	$("#" + nombreLista).innerHTML += opcion;
 	if(nombreLista == 'nuevoPedido') { RecalculaPrecioPedido(nombreLista); }
@@ -430,27 +411,15 @@ function AgregarOptionLista(e, nombreLista) {
 
 function EliminaOptionLista(nombreLista, e) {
 	var selector = '#' + nombreLista; 
-	//var precio = e.dataset["precio"];
-
 	var x = $(selector);
 	x.remove(x.selectedIndex);
-
-	// if ($('#' + nombreLista).length == 0) { $('#' + nombreLista).innerHTML += "<option></option>"; }
-
 	$$('#' + nombreLista + ' option').forEach(x => { x.selected = true; });
-
-	if ($('#precioPedido') != null) {
-		// var precioActual = $('#precioPedido').innerText.replace('€', '');
-		// ActualizaPrecioPedido(-precio, precioActual);
-		RecalculaPrecioPedido(nombreLista);
-	}
+	if(nombreLista == 'nuevoPedido') { RecalculaPrecioPedido(nombreLista); }
 }
 
 function EventoBorrarComposicion(nombreLista) {
 	var selector = '#' + nombreLista + " option";
 	$$(selector).forEach(li => { li.addEventListener("click", function () { EliminaOptionLista(nombreLista, this); }); });
-	// selector = '#' + nombreLista;
-	// $(selector).addEventListener("onchange", function () { alert(this); /* EliminaOptionLista(nombreLista, this); */ });
 }
 
 function CargaMenuDia(dt = FechaAhora()) {
@@ -527,14 +496,6 @@ function EliminarPedido(IdPedido) {
 	})
 	.catch(function(err) { console.log(err); });	
 }
-
-/*
-function ActualizaPrecioPedido(valor, precioActual = 0) {
-	precioActual = totalPedido != 0 ? 0 : precioActual;
-	totalPedido += parseFloat(precioActual) + parseFloat(valor);
-	$('#precioPedido').innerText = totalPedido + '€';
-}
-*/
 
 function RecalculaPrecioPedido(nombreLista) {
 	var totalPedido = 0;

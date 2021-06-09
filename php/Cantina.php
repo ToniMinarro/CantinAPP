@@ -8,7 +8,6 @@ if(isset($_POST['inicializar']))
 {
 	CargaCabecera();
 	CargaContenido();
-	// CargaPie();
 }
 
 if(isset($_POST['menuDia']))
@@ -70,8 +69,6 @@ if(isset($_POST['menuDia']))
 	$html .= '	</ul>';
 	$html .= '</nav>';
 
-	
-	
 	print $html;
 }
 
@@ -253,9 +250,7 @@ if(isset($_POST['newMenu']))
 					<div class="col-md-6">
 						<div class="form-group">
 							<label for="nuevoMenu">Configura nuevo menú</label>
-							<select multiple class="form-control" name="nuevoMenu[]" id="nuevoMenu" size="9" required>
-								<!--option></option-->
-							</select>
+							<select multiple class="form-control" name="nuevoMenu[]" id="nuevoMenu" size="9" required></select>
 						</div>
 						<div class="form-group">
 							<label for="fechaNuevoMenu">Fecha de menú</label>
@@ -571,17 +566,6 @@ if(isset($_POST['nuevoPedido']) && isset($_POST['fechaServicio']) && isset($_POS
 	{
 		if($pedido->guardaLineasPedido())
 		{
-			/*
-			if(isset($_POST['preOrder']) && $_POST['preOrder'])
-			{
-				return print $pedido->__get('idPedido');
-			}
-			else
-			{
-				return print 'Pedido correctamente creado para el día ' .$fechaPedido;
-			}
-			*/
-
 			$result = array(
 				"IdPedido"  => $pedido->__get('idPedido'),
 				"Mensaje" => 'Pedido correctamente creado para el día ' .$fechaPedido
@@ -608,8 +592,6 @@ if(isset($_POST['PedModificar']) && isset($_POST['idComposicion']) && isset($_PO
 
 	if(Pedido::ModificarPedido($ped, $composicion, $fechaServicio))
 	{
-		// return print 'Pedido correctamente modificado para el día ' .$fechaServicio;
-
 		$result = array(
 			"IdPedido"  => $ped,
 			"Mensaje" => 'Pedido correctamente modificado para el día ' .$fechaServicio
@@ -663,7 +645,6 @@ function CargaPedidoModif($idPedido)
 			$html .= '<option style="cursor: pointer;" data-id="'.$p["IdComposicion"].'" data-precio="'.$p["Precio"].'" name="nuevoPedido[]" selected="">' . $p["Nombre"] . '</option>';
 		}
 	}
-	// else { $html .= '<option></option>'; }
 	
 	return $html;
 }
@@ -702,7 +683,6 @@ function CreaTablaMenuHoy()
 
 function CreaSelectTipoComposicion()
 {
-	// $html = '<option></option>';
 	$html = '';
 	$tipos = Composicion::CargaTiposComposicion();
 	foreach ($tipos as $tipo) {
