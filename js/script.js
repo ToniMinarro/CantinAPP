@@ -290,7 +290,9 @@ function ModificarPedido (pedido, options, fecha, hora)
 {
 	var dataPost = new URLSearchParams();
 	dataPost.append("PedModificar", pedido);
-	options.forEach(o => { dataPost.append("idComposicion[]", o.dataset["id"]); });
+	
+	options.forEach(o => { if (o.selected) { dataPost.append("idComposicion[]", o.dataset["id"]); } });
+	
 	dataPost.append("fecha", fecha);
 	dataPost.append("hora", hora);
 
@@ -426,11 +428,15 @@ function EliminaOptionLista(nombreLista, e) {
 	var x = $(selector);
 	x.remove(x.selectedIndex);
 	if ($('#' + nombreLista).length == 0) { $('#' + nombreLista).innerHTML += "<option></option>"; }
+
+	$$('#' + nombreLista + ' option').forEach(x => { x.selected = true; });
 }
 
 function EventoBorrarComposicion(nombreLista) {
 	var selector = '#' + nombreLista + " option";
 	$$(selector).forEach(li => { li.addEventListener("click", function () { EliminaOptionLista(nombreLista, this); }); });
+	// selector = '#' + nombreLista;
+	// $(selector).addEventListener("onchange", function () { alert(this); /* EliminaOptionLista(nombreLista, this); */ });
 }
 
 function CargaMenuDia(dt = FechaAhora()) {
