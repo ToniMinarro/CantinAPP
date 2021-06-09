@@ -599,7 +599,7 @@ if(isset($_POST['PedModificar']) && isset($_POST['idComposicion']) && isset($_PO
 
 	if(Pedido::ModificarPedido($ped, $composicion, $fechaServicio))
 	{
-		return print 'Pedido correctamente creado para el día ' .$fechaServicio;
+		return print 'Pedido correctamente modificado para el día ' .$fechaServicio;
 	}
 }
 
@@ -646,7 +646,7 @@ function CargaPedidoModif($idPedido)
 			$html .= '<option style="cursor: pointer;" data-id="'.$p["IdComposicion"].'" data-precio="'.$p["Precio"].'" name="nuevoPedido[]" selected="">' . $p["Nombre"] . '</option>';
 		}
 	}
-	else { $html .= '<option></option>'; }
+	// else { $html .= '<option></option>'; }
 	
 	return $html;
 }

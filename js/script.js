@@ -89,8 +89,8 @@ function ClickEnBotonera(bt, message = null, modifPedido, nuevoPedido, preOrder 
 		})
 		.then(function(data) {
 				$('#capaContenido').innerHTML = data;
-				$('#message').innerHTML = message == null ? '' : data;
-				if(message != null) { jQuery('#liveToast').toast('show'); }
+				// $('#message').innerHTML = message == null ? '' : data;
+				// if(message != null) { jQuery('#liveToast').toast('show'); }
 				AgregarEventos(bt);
 	
 		})
@@ -241,11 +241,15 @@ function ClickFilaMenu(idTabla, nombreLista, actualizaPrecio) {
 	);
 	table.on('click', 'tbody tr', x => {
 		AgregarOptionLista(x.currentTarget, nombreLista);
+		
+		/*
 		if (actualizaPrecio) {
-			var precio = x.currentTarget.children[0].dataset["precio"];
-			var precioActual = $('#precioPedido').innerText.replace('€', '');
-			ActualizaPrecioPedido(precio, precioActual);
+			// var precio = x.currentTarget.children[0].dataset["precio"];
+			// var precioActual = $('#precioPedido').innerText.replace('€', '');
+			// ActualizaPrecioPedido(precio, precioActual);
+			RecalculaPrecioPedido(nombreLista);
 		}
+		*/
     });
 }
 
@@ -303,6 +307,8 @@ function ModificarPedido (pedido, options, fecha, hora)
 	})
 	.then(function(data) {
 		var bt = $('#miPedido');
+		$('#message').innerHTML = data;
+		jQuery('#liveToast').toast('show');
 		ClickEnBotonera(bt);
 	})
 	.catch(function(err) { console.log(err); });
@@ -409,27 +415,33 @@ function FuncionLogoff()
 }
 
 function AgregarOptionLista(e, nombreLista) {
-	var selector = "#" + nombreLista + " option";
+	// var selector = "#" + nombreLista + " option";
+	// var selector = "#" + nombreLista;
 	var id = e.children[0].dataset["id"];
 	var value = e.children[0].dataset["precio"];
-	if($(selector).innerHTML === '') { $(selector).remove($(selector).children[0]); }
+	// if($(selector).innerHTML === '') { $(selector).remove($(selector).children[0]); }
 	var opcion = '<option style="cursor: pointer;" data-id=' + id + ' data-precio=' + value + ' name=' + nombreLista + '[] selected>' + e.firstElementChild.innerText + '</option>';
 	$("#" + nombreLista).innerHTML += opcion;
+	RecalculaPrecioPedido(nombreLista);
 	EventoBorrarComposicion(nombreLista);
 }
 
 function EliminaOptionLista(nombreLista, e) {
 	var selector = '#' + nombreLista; 
-	var precio = e.dataset["precio"];
-	if ($('#precioPedido') != null) {
-		var precioActual = $('#precioPedido').innerText.replace('€', '');
-		ActualizaPrecioPedido(-precio, precioActual);
-	}
+	//var precio = e.dataset["precio"];
+
 	var x = $(selector);
 	x.remove(x.selectedIndex);
-	if ($('#' + nombreLista).length == 0) { $('#' + nombreLista).innerHTML += "<option></option>"; }
+
+	// if ($('#' + nombreLista).length == 0) { $('#' + nombreLista).innerHTML += "<option></option>"; }
 
 	$$('#' + nombreLista + ' option').forEach(x => { x.selected = true; });
+
+	if ($('#precioPedido') != null) {
+		// var precioActual = $('#precioPedido').innerText.replace('€', '');
+		// ActualizaPrecioPedido(-precio, precioActual);
+		RecalculaPrecioPedido(nombreLista);
+	}
 }
 
 function EventoBorrarComposicion(nombreLista) {
@@ -514,10 +526,20 @@ function EliminarPedido(IdPedido) {
 	.catch(function(err) { console.log(err); });	
 }
 
+/*
 function ActualizaPrecioPedido(valor, precioActual = 0) {
 	precioActual = totalPedido != 0 ? 0 : precioActual;
 	totalPedido += parseFloat(precioActual) + parseFloat(valor);
 	$('#precioPedido').innerText = totalPedido + '€';
+}
+*/
+
+function RecalculaPrecioPedido(nombreLista) {
+	var totalPedido = 0;
+	$$('#' + nombreLista + ' option').forEach(x => {
+		totalPedido += parseFloat(x.dataset["precio"]);
+	})
+	$('#precioPedido').innerText = (Number.isNaN(totalPedido) ? 0 : totalPedido) + '€';
 }
 
 function EsconderCabeceraScroll() {
