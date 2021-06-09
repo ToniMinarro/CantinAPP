@@ -571,6 +571,7 @@ if(isset($_POST['nuevoPedido']) && isset($_POST['fechaServicio']) && isset($_POS
 	{
 		if($pedido->guardaLineasPedido())
 		{
+			/*
 			if(isset($_POST['preOrder']) && $_POST['preOrder'])
 			{
 				return print $pedido->__get('idPedido');
@@ -579,6 +580,14 @@ if(isset($_POST['nuevoPedido']) && isset($_POST['fechaServicio']) && isset($_POS
 			{
 				return print 'Pedido correctamente creado para el día ' .$fechaPedido;
 			}
+			*/
+
+			$result = array(
+				"IdPedido"  => $pedido->__get('idPedido'),
+				"Mensaje" => 'Pedido correctamente creado para el día ' .$fechaPedido
+			);
+			
+			print json_encode($result);
 		}
 		else
 		{
@@ -599,8 +608,16 @@ if(isset($_POST['PedModificar']) && isset($_POST['idComposicion']) && isset($_PO
 
 	if(Pedido::ModificarPedido($ped, $composicion, $fechaServicio))
 	{
-		return print 'Pedido correctamente modificado para el día ' .$fechaServicio;
+		// return print 'Pedido correctamente modificado para el día ' .$fechaServicio;
+
+		$result = array(
+			"IdPedido"  => $ped,
+			"Mensaje" => 'Pedido correctamente modificado para el día ' .$fechaServicio
+		);
+		
+		return print json_encode($result);
 	}
+	else return print 'FALLO';
 }
 
 function CreaTablaNuevoMenu()

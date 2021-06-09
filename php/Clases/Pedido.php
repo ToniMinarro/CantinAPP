@@ -92,20 +92,20 @@ class Pedido {
 	}
 
 	public static function ModificarPedido($ped, $composicion, $fechaServicio) {
-		$i = 0;
+		// $i = 0;
 
 		$consulta = "DELETE FROM DetallePedido WHERE IdPedido = :idPedido";
 		$sentencia = Conn()->prepare($consulta);
 		$sentencia->bindParam(":idPedido", $ped);
 		$sentencia->execute();
-		if($sentencia->rowCount() >= 1)
-		{
+		// if($sentencia->rowCount() >= 1)
+		// {
 			$consulta = "UPDATE Pedido SET FechaServicio = :fechaServicio WHERE IdPedido = :idPedido";
 			$sentencia = Conn()->prepare($consulta);
 			$sentencia->bindParam(":fechaServicio", $fechaServicio);
 			$sentencia->bindParam(":idPedido", $ped);
 			$sentencia->execute();
-			$i += $sentencia->rowCount();
+			// $i += $sentencia->rowCount();
 
 			foreach ($composicion as $c)
 			{
@@ -114,12 +114,13 @@ class Pedido {
 				$sentencia->bindParam(":idPedido", $ped);
 				$sentencia->bindParam(":idComposicion", $c["IdComposicion"]);
 				$sentencia->execute();	
-				$i += $sentencia->rowCount();
+				// $i += $sentencia->rowCount();
 			}
-		}
-		else { return false; }
+		// }
+		// else { return false; }
 
-		return $i == (sizeOf($composicion) + 1);
+		return true;
+		// return $i == (sizeOf($composicion) + 1);
 	}
 
 	public static function PagarPedido($ped) {

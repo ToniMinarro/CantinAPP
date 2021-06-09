@@ -258,12 +258,12 @@ function AgregarPedido(preOrder = false) {
 	var dataPost = new URLSearchParams();
 	for(let o of valores)
 	{
-		if (preOrder)
-		{
-			var check = o.lastChild.firstElementChild.checked;
+		// if (preOrder)
+		// {
+			var check = preOrder ? o.lastChild.firstElementChild.checked : o.selected;
 			if (check) { dataPost.append("nuevoPedido[]", o.dataset["id"]); }
-		}
-		else { dataPost.append("nuevoPedido[]", o.dataset["id"]); }
+		// }
+		// else { dataPost.append("nuevoPedido[]", o.dataset["id"]); }
 	}
 	dataPost.append("fechaServicio", preOrder ? FechaAhora() : $('#txtFechaServicio').value);
 	dataPost.append("horaServicio", preOrder ? HoraAhora() : $('#txtHoraServicio').value);
@@ -276,11 +276,12 @@ function AgregarPedido(preOrder = false) {
 	})
 	.then(function(data) {
 		var bt = $('#miPedido');
-		var idPedido = parseInt(data);
+		var jsondata = JSON.parse("{" + data.split("{")[1]);
+		var idPedido = parseInt(jsondata["IdPedido"]);
 		if(preOrder) { ClickEnBotonera(bt, null, idPedido, false, preOrder); }
 		else
 		{
-			$('#message').innerHTML = message == null ? '' : data;
+			$('#message').innerHTML = message == null ? '' : jsondata["Mensaje"];
 			if(message != null) { jQuery('#liveToast').toast('show'); }
 			ClickEnBotonera(bt, data);
 		}
@@ -307,7 +308,8 @@ function ModificarPedido (pedido, options, fecha, hora)
 	})
 	.then(function(data) {
 		var bt = $('#miPedido');
-		$('#message').innerHTML = data;
+		var jsondata = JSON.parse("{" + data.split("{")[1]);
+		$('#message').innerHTML = jsondata["Mensaje"];
 		jQuery('#liveToast').toast('show');
 		ClickEnBotonera(bt);
 	})
