@@ -254,7 +254,7 @@ if(isset($_POST['newMenu']))
 						<div class="form-group">
 							<label for="nuevoMenu">Configura nuevo menú</label>
 							<select multiple class="form-control" name="nuevoMenu[]" id="nuevoMenu" size="9" required>
-								<option></option>
+								<!--option></option-->
 							</select>
 						</div>
 						<div class="form-group">
@@ -685,7 +685,8 @@ function CreaTablaMenuHoy()
 
 function CreaSelectTipoComposicion()
 {
-	$html = '<option></option>';
+	// $html = '<option></option>';
+	$html = '';
 	$tipos = Composicion::CargaTiposComposicion();
 	foreach ($tipos as $tipo) {
 		$html .= '<option style="cursor: pointer;" data-id="'.$tipo['IdDetalleComposicion'].'">'.$tipo['Descripcion'].'</option>';

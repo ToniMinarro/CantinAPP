@@ -422,7 +422,7 @@ function AgregarOptionLista(e, nombreLista) {
 	// if($(selector).innerHTML === '') { $(selector).remove($(selector).children[0]); }
 	var opcion = '<option style="cursor: pointer;" data-id=' + id + ' data-precio=' + value + ' name=' + nombreLista + '[] selected>' + e.firstElementChild.innerText + '</option>';
 	$("#" + nombreLista).innerHTML += opcion;
-	RecalculaPrecioPedido(nombreLista);
+	if(nombreLista == 'nuevoPedido') { RecalculaPrecioPedido(nombreLista); }
 	EventoBorrarComposicion(nombreLista);
 }
 
@@ -537,7 +537,7 @@ function ActualizaPrecioPedido(valor, precioActual = 0) {
 function RecalculaPrecioPedido(nombreLista) {
 	var totalPedido = 0;
 	$$('#' + nombreLista + ' option').forEach(x => {
-		totalPedido += parseFloat(x.dataset["precio"]);
+		totalPedido += x.selected ? parseFloat(x.dataset["precio"]) : 0;
 	})
 	$('#precioPedido').innerText = (Number.isNaN(totalPedido) ? 0 : totalPedido) + '€';
 }
