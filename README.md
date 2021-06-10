@@ -28,7 +28,7 @@ INSTRUCCIONES DE DESPLIEGUE
 1º Instalar servidor web (WAMP, LAMP, etc.)
 
 2º Instalar git o descargar
-	https://github.com/ToniMinarro/CantinAPP.git y copiar en la ruta de documentos del servidor como /RAIZ/CantinAPP
+https://github.com/ToniMinarro/CantinAPP.git y copiar en la ruta de documentos del servidor como /RAIZ/CantinAPP
 
 3º Clonar repositorio en ruta de documentos del servidor web
 	cd C:\xampp\htdocs
