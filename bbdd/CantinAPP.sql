@@ -13,9 +13,9 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
--- Volcando estructura de base de datos para Cantina
-CREATE DATABASE IF NOT EXISTS `Cantina` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
-USE `Cantina`;
+-- Volcando estructura de base de datos para CantinAPP
+CREATE DATABASE IF NOT EXISTS `CantinAPP` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+USE `CantinAPP`;
 
 -- Volcando estructura para tabla Cantina.Composicion
 CREATE TABLE IF NOT EXISTS `Composicion` (
@@ -2149,7 +2149,7 @@ INSERT INTO `Usuario` (`IdUsuario`, `Nombre`, `Email`, `Hash`) VALUES
 /*!40000 ALTER TABLE `Usuario` ENABLE KEYS */;
 
 CREATE USER 'CantinAPP'@'%' IDENTIFIED BY 'xuWoG325WA7i';
-GRANT ALL PRIVILEGES ON Cantina.* TO 'CantinAPP'@'%';
+GRANT ALL PRIVILEGES ON CantinAPP.* TO 'CantinAPP'@'%';
 FLUSH PRIVILEGES;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
