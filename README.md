@@ -22,3 +22,31 @@ El enfoque del proyecto es mediante el paradigma POO, para lo que se han creado 
 Además de esto, y como filosofía personal, adoptada en base al desarrollo en diferentes frameworks, cada clase contiene la definición de atributos, constructores, métodos, etc., además de la funcionalidad de comunicación directa con la BBDD a través de PDO.
 
 En este sentido, resulta muy sencillo instanciar una clase, pasarle la información que requiere para su construcción, y hacer la misma persistente empleando el mínimo esfuerzo.
+
+INSTRUCCIONES DE DESPLIEGUE
+
+1º Instalar servidor web (WAMP, LAMP, etc.)
+
+2º Instalar git o descargar
+	https://github.com/ToniMinarro/CantinAPP.git y copiar en la ruta de documentos del servidor como /RAIZ/CantinAPP
+
+3º Clonar repositorio en ruta de documentos del servidor web
+	cd C:\xampp\htdocs
+	git clone https://github.com/ToniMinarro/CantinAPP.git CantinAPP
+
+4º Conectar a BBDD en localhost con los siguientes valores (valores por defecto de la instalación:
+HOST: localhost
+PORT: 3306
+USER: root
+PASS: (vacía)
+BBDD: (vacía)
+
+5º Importar archivo SQL en la BBDD
+(WINDOWS)
+mysql -p -u root < C:\xampp\htdocs\CantinAPP\bbdd\CantinAPP.sql
+
+(LINUX)
+mysql -u root -p mysql < /var/www/html/CantinAPP/bbdd/CantinAPP.sql
+
+6º Iniciar
+	http://localhost/CantinAPP/
