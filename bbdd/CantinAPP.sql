@@ -2148,7 +2148,6 @@ INSERT INTO `Usuario` (`IdUsuario`, `Nombre`, `Email`, `Hash`) VALUES
 	(12, 'Fran', 'franciscoburlomolina@gmail.com', '$2y$10$Aw7VMhtQA88NQSzuRmcF.eKEbjY7qJAC593cnX0fmelH3NccwDUse');
 /*!40000 ALTER TABLE `Usuario` ENABLE KEYS */;
 
-DROP DATABASE CantinAPP;
 DROP USER 'CantinAPP'@'%';
 CREATE USER 'CantinAPP'@'%' IDENTIFIED BY 'xuWoG325WA7i';
 GRANT ALL PRIVILEGES ON CantinAPP.* TO 'CantinAPP'@'%';
