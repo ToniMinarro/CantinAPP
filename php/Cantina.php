@@ -447,7 +447,7 @@ if(isset($_POST['cargaFormRegistro']))
 ?>
 	<main id="formRegistro" class="panel d-flex justify-content-center">
 		<form method="post" action="javascript:void(0);" id="signup-form" name="signup-form">
-			<img class="mb-4" src="/img/logotipo.svg" alt="" width="72" height="72">
+			<img class="mb-4" src="img/logotipo.svg" alt="" width="72" height="72">
 			<h1 class="h3 mb-3 fw-normal">Registro de usuario</h1>
 
 			<div class="form-floating">
@@ -479,7 +479,7 @@ if(isset($_POST['cargaFormLogin']))
 ?>
 	<main id="formLogin" class="panel d-flex justify-content-center">
 		<form method="post" action="javascript:void(0);" id="signin-form" name="signin-form">
-			<img class="mb-4" src="/img/logotipo.svg" alt="" width="72" height="72">
+			<img class="mb-4" src="img/logotipo.svg" alt="" width="72" height="72">
 			<h1 class="h3 mb-3 fw-normal">Inicio de sesión</h1>
 
 			<div class="form-floating">
