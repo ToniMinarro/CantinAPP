@@ -1,27 +1,10 @@
-const $ = document.querySelector.bind(document)
-const $$ = document.querySelectorAll.bind(document)
-const INDICE = 'http://localhost/CantinAPP/'; 				// PARA DEPLOY EN LOCAL
-// const INDICE = 'http://rpi/'; 					// PARA DEPLOY EN RASPBERRY PI
-// const INDICE = 'http://www.rpi.fsalzillo.com/'; 	// PARA DEPLOY EN LAN
-// const INDICE = 'http://cantinapp.duckdns.org/'; 	// PARA DEPLOY EN WAN
-
-/* DESCOMENTAR ESTAS LÍNEAS PARA URL ESTÁTICA */
+const $ = document.querySelector.bind(document);
+const $$ = document.querySelectorAll.bind(document);
+const HOST = location.hostname;
+const INDICE = 'http://' + HOST + '/CantinAPP/';
 const CANTINA = INDICE + 'php/Cantina.php';
+
 Inicializar();
-
-/* DESCOMENTAR ESTAS LÍNEAS PARA URL EN FUNCIÓN DE LAN/WAN */
-/*
-async function getIP() {
-const response = await fetch("https://api.ipify.org/?format=jsonp&callback=getIP");
-const value = await response.text();
-return value.includes("192.168") ? 'http://rpi/' : 'http://cantinapp.duckdns.org/';
-}
-
-var CANTINA = getIP().then(x => {
-	CANTINA = x + 'php/Cantina.php';
-	Inicializar();
-});
-*/
 
 var yesterday = new Date();
 var today = new Date();
