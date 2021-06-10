@@ -13,8 +13,17 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
+
+DROP USER IF EXISTS 'CantinAPP'@'%';
+CREATE USER 'CantinAPP'@'%' IDENTIFIED BY 'xuWoG325WA7i';
+DROP DATABASE IF EXISTS CantinAPP;
+
 -- Volcando estructura de base de datos para CantinAPP
 CREATE DATABASE IF NOT EXISTS `CantinAPP` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+
+GRANT ALL PRIVILEGES ON CantinAPP.* TO 'CantinAPP'@'%';
+FLUSH PRIVILEGES;
+
 USE `CantinAPP`;
 
 -- Volcando estructura para tabla Cantina.Composicion
@@ -2147,11 +2156,6 @@ INSERT INTO `Usuario` (`IdUsuario`, `Nombre`, `Email`, `Hash`) VALUES
 	(11, 'Guillermina', 'guilerminna@hotmail.com', '$2y$10$25LsWRDBM5JN0RfQd9zl1OOYzdX6dBiNN.JmfKKelnPgJ4GLwc/Ga'),
 	(12, 'Fran', 'franciscoburlomolina@gmail.com', '$2y$10$Aw7VMhtQA88NQSzuRmcF.eKEbjY7qJAC593cnX0fmelH3NccwDUse');
 /*!40000 ALTER TABLE `Usuario` ENABLE KEYS */;
-
-DROP USER 'CantinAPP'@'%';
-CREATE USER 'CantinAPP'@'%' IDENTIFIED BY 'xuWoG325WA7i';
-GRANT ALL PRIVILEGES ON CantinAPP.* TO 'CantinAPP'@'%';
-FLUSH PRIVILEGES;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
