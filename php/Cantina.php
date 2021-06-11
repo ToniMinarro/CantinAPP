@@ -222,7 +222,7 @@ if(isset($_POST['newComposicion']))
 					</select>
 				</div>
 				<div class="text-center">
-					<button type="button" class="btn btn-primary" id="agregarComposicion">Añadir a la carta</button>
+					<button type="button" class="btn btn-primary my-5" id="agregarComposicion">Añadir a la carta</button>
 				</div>
 			</form>
 		</div>
@@ -295,10 +295,10 @@ if(isset($_POST['activeOrders']) || isset($_POST['pagarPedido']) || isset($_POST
 		foreach ($pedidosActivos as $ped)
 		{
 			$importePedido = 0;
-			$html .= '<table class="table table-striped table-hover table-bordered">';
+			$html .= '<table class="table table-striped table-hover table-bordered my-5">';
 			$html .= '<thead class="text-center">';
 			$html .= '<tr>';
-			$html .= '		<th colspan="3">Pedido número '.date('Y') . '/' .$ped['IdPedido']. ' - Servir en ' .$ped['FechaServicio']. ' - Cliente: '.$ped['Cliente'].' ['.$ped['IdEmpleado'].']</th>';
+			$html .= '		<th colspan="3"><h6>Pedido número '.date('Y') . '/' .$ped['IdPedido']. '</h6><h6>Servir en ' .$ped['FechaServicio']. ' - Cliente: '.$ped['Cliente'].' ['.$ped['IdEmpleado'].']</h6></th>';
 			$html .= '</tr>';
 			$html .= '</thead>';
 
@@ -704,30 +704,30 @@ function CargaCabecera()
 		</button>
 
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav w-100 justify-content-around">
+			<ul class="navbar-nav w-100 justify-content-around nav-pills">
 
 			<?php if(isset($_SESSION['IdCliente'])) { ?>
 				<li class="nav-item">
-					<a href="javascript:void(0);" class="nav-link" id="menuDia">Menú del día</a>
+					<a href="javascript:void(0);" class="nav-link text-center" id="menuDia">Menú del día</a>
 				</li>
 				
 				<li class="nav-item">
-					<a href="javascript:void(0);" class="nav-link" id="miPedido">Mis pedidos</a>
+					<a href="javascript:void(0);" class="nav-link text-center" id="miPedido">Mis pedidos</a>
 				</li>
 				
 				<?php if($_SESSION['IdCliente'] == 1 && $_SESSION['Nombre'] == 'Admin') { ?>
 				<li class="nav-item">
-					<a href="javascript:void(0);" class="nav-link" id="newComposicion">Nuevo plato</a>
+					<a href="javascript:void(0);" class="nav-link text-center" id="newComposicion">Nuevo plato</a>
 				</li>
 
 				<li class="nav-item">
-					<a href="javascript:void(0);" class="nav-link" id="newMenu">Nuevo Menú</a>
+					<a href="javascript:void(0);" class="nav-link text-center" id="newMenu">Nuevo Menú</a>
 				</li>
 				<li class="nav-item">
-					<a href="javascript:void(0);" class="nav-link" id="activeOrders">Servicios Pendientes</a>
+					<a href="javascript:void(0);" class="nav-link text-center" id="activeOrders">Servicios Pendientes</a>
 				</li>
 				<li class="nav-item">
-					<a href="javascript:void(0);" class="nav-link" id="cashSummary">Resumen de caja</a>
+					<a href="javascript:void(0);" class="nav-link text-center" id="cashSummary">Resumen de caja</a>
 				</li>
 				<?php } } ?>
 

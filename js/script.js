@@ -41,9 +41,11 @@ function Inicializar() {
 		scripts = document.body.innerHTML;
 		document.body.innerHTML = data + scripts;
 		
-		$$('.nav-link').forEach(bt => { bt.addEventListener("click", function() { ClickEnBotonera(bt);} ); });
-		$('#logoEmpresa').addEventListener("click", function(){ CargaMenuDia(); });
-		$('#tituloCantinAPP').addEventListener("click", function(){ CargaMenuDia(); });
+		btActivo();
+
+		$$('.nav-link').forEach(bt => { bt.addEventListener("click", function() { ClickEnBotonera(bt); } ); });
+		$('#logoEmpresa').addEventListener("click", function(){ ClickEnBotonera($('#menuDia')); });
+		$('#tituloCantinAPP').addEventListener("click", function(){ ClickEnBotonera($('#menuDia')); });
 		CargaMenuDia();
 		EsconderCabeceraScroll();
 		EsconderBarraNavegacion();
@@ -51,9 +53,33 @@ function Inicializar() {
 	.catch(function(err) { console.log(err); });
 }
 
+function btActivo()
+{
+	$$('.nav-link').forEach(bt => {
+		
+			var current = document.getElementsByClassName("active");
+			if (current.length != 0) { current[0].className = current[0].className.replace(" active", ""); }
+			$$('.nav-link').forEach(bt => { bt.style = ""; });
+
+	});
+	
+	$('#menuDia').className += " active";
+	$('#menuDia').style.color = "white";
+
+	$$('.nav-link').forEach(bt => {
+		bt.addEventListener("click", function() {
+			var current = document.getElementsByClassName("active");
+			current[0].className = current[0].className.replace(" active", "");
+			$$('.nav-link').forEach(bt => { bt.style = ""; });
+			this.className += " active";
+			this.style.color = "white";
+		});
+	});
+}
+
 function ClickEnBotonera(bt, message = null, modifPedido, nuevoPedido, preOrder = null)
 {
-	if(bt.id == 'menuDia') { CargaMenuDia(); }
+	if(bt.id == 'menuDia') { btActivo(); CargaMenuDia(); }
 	else
 	{
 		var dataPost = new URLSearchParams();
