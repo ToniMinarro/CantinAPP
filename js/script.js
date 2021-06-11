@@ -73,6 +73,7 @@ function ClickEnBotonera(bt, message = null, modifPedido, nuevoPedido, preOrder 
 		})
 		.then(function(data) {
 				$('#capaContenido').innerHTML = data;
+				if(bt.id == 'miPedido') { window.scrollTo(0,document.body.scrollHeight); }
 				AgregarEventos(bt);
 	
 		})
