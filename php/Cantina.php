@@ -58,16 +58,16 @@ if(isset($_POST['menuDia']))
 
 	if(isset($_SESSION['IdCliente']))
 	{
-		$html .= '<form method="post" action="javascript:void(0);" name="doOrderForm" id="doOrderForm" class="text-right"><button id="BT_HacerPedido" onclick="javascript:void(0);" class="btn btn-success btn-lg float-right" type="submit" Disabled>Hacer pedido<span id="lblPrecio" class="badge badge-light">0€</span></button></form>';
+		$html .= '<div class="d-flex flex-row-reverse"><form method="post" action="javascript:void(0);" name="doOrderForm" id="doOrderForm"><button id="BT_HacerPedido" onclick="javascript:void(0);" class="btn btn-success btn-lg" type="submit" Disabled>Hacer pedido<span id="lblPrecio" class="badge badge-light">0€</span></button></form></div>';
 	}
 
-	$html .= '<nav aria-label="Page navigation example">';
+	$html .= '<div class="mt-5 mt-md-3"><nav aria-label="Page navigation example" class="navbar-fixed-bottom">';
 	$html .= '	<ul class="pagination justify-content-center" style="cursor: pointer;"">';
 	$html .= '		<li class="page-item"><a class="page-link" id="yesterday">Ayer</a></li>';
 	$html .= '		<li class="page-item active"><a class="page-link" id="today">Hoy</a></li>';
 	$html .= '		<li class="page-item"><a class="page-link" id="tomorrow">Mañana</a></li>';
 	$html .= '	</ul>';
-	$html .= '</nav>';
+	$html .= '</nav></div>';
 
 	print $html;
 }
@@ -82,7 +82,7 @@ if(isset($_POST['miPedido']))
 					<h2 id="titulo">Mis pedidos activos</h2>
 				</div>
 				<div class="col-md-12 text-center">
-					<button type="button" class="btn btn-primary" id="btNuevoPedido">Pedido nuevo</button>
+					<button type="button" class="btn btn-primary my-4" id="btNuevoPedido">Pedido nuevo</button>
 				</div>
 			</div>
 		<?php
@@ -92,10 +92,10 @@ if(isset($_POST['miPedido']))
 				{
 						$importePedido = 0;
 						?>
-					<table class="table table-striped table-hover table-bordered">
+					<table class="table table-striped table-hover table-bordered my-5">
 						<thead class="text-center">
 							<tr style="cursor: pointer;">
-								<th colspan="3">Pedido número <?php  print date('Y') . '/' .$ped['IdPedido'] ?> - Servir en <?php print $ped['FechaServicio'] ?> - Cliente: <?php print $ped['Cliente'] ?></th>
+								<th colspan="3"><h6>Pedido número <?php  print date('Y') . '/' .$ped['IdPedido'] ?></h6><h6>Servir en <?php print $ped['FechaServicio'] ?> - Cliente: <?php print $ped['Cliente'] ?></h6></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -139,7 +139,7 @@ if(isset($_POST['miPedido']))
 				else
 				{
 				print '<div class="col-md-12 text-center">
-							<button type="button" class="btn btn-primary" id="btVerMisPedidos">Ver mis pedidos</button>
+							<button type="button" class="btn btn-primary my-4" id="btVerMisPedidos">Ver mis pedidos</button>
 						</div>'; } ?>
 			</div>
 			<div class="col-md-12">
@@ -179,14 +179,14 @@ if(isset($_POST['miPedido']))
 						</div>
 					</div>
 					<div class="text-center text-right">
-						<div class="form-group">
+						<div class="form-group mt-3">
 							<h5>Tu pedido te cuesta:</h5>
 							<h5 id="precioPedido"><?php print ($pedido != null) ? Pedido::CargaImportePedido($pedido)['ImporteTotal'] + 0 : '0'; ?>€</h5>
 						</div>
 						<?php if($preOrder) { ?>
-							<button type="button" class="btn btn-primary btpedido" id="btDoPreOrder" data-pedido="<?php print $pedido; ?>">Pedir</button>
+							<button type="button" class="btn btn-primary btpedido mb-5" id="btDoPreOrder" data-pedido="<?php print $pedido; ?>">Pedir</button>
 						<?php } else { ?>
-							<button type="button" class="btn btn-primary btpedido" id="btAgregaPedido" data-pedido="<?php print $pedido; ?>"><?php print ($pedido != null ? "Actualizar pedido" : "Pedir"); ?></button>
+							<button type="button" class="btn btn-primary btpedido mb-5" id="btAgregaPedido" data-pedido="<?php print $pedido; ?>"><?php print ($pedido != null ? "Actualizar pedido" : "Pedir"); ?></button>
 						<?php } ?>
 					</div>
 				</form>
@@ -261,7 +261,7 @@ if(isset($_POST['newMenu']))
 					</div>
 				</div>
 				<div class="text-center">
-					<button type="button" class="btn btn-primary" id="btAgregaMenu">Añadir menú</button>
+					<button type="button" class="btn btn-primary mt-3" id="btAgregaMenu">Añadir menú</button>
 				</div>
 			</form>
 		</div>
@@ -694,10 +694,10 @@ function CreaSelectTipoComposicion()
 function CargaCabecera()
 {
 ?>
-	<nav id="cabecera" class="autohide navbar navbar-expand-lg navbar-light bg-light justify-content-around sticky-top ml-auto">
+	<nav id="cabecera" class="autohide navbar navbar-expand-md navbar-light bg-light justify-content-around sticky-top ml-auto">
 		<a href="javascript:void(0);" class="navbar-brand">
 			<img src="img/logotipo.svg" width="80" height="80" class="d-inline-block align-top" alt="Logo" id="logoEmpresa">
-			<a href="javascript:void(0);" id="tituloCantinAPP" class="btn"><span class="mb-0 h3">CantinAPP</span></a>
+			<a href="javascript:void(0);" id="tituloCantinAPP" class="btn"><span class="mx-auto mr-5 display-6">CantinAPP</span></a>
 		</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>

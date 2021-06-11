@@ -40,12 +40,13 @@ function Inicializar() {
 	.then(function(data) {
 		scripts = document.body.innerHTML;
 		document.body.innerHTML = data + scripts;
-		EsconderBarraNavegacion();
+		
 		$$('.nav-link').forEach(bt => { bt.addEventListener("click", function() { ClickEnBotonera(bt);} ); });
 		$('#logoEmpresa').addEventListener("click", function(){ CargaMenuDia(); });
 		$('#tituloCantinAPP').addEventListener("click", function(){ CargaMenuDia(); });
 		CargaMenuDia();
 		EsconderCabeceraScroll();
+		EsconderBarraNavegacion();
 	})
 	.catch(function(err) { console.log(err); });
 }
@@ -508,10 +509,7 @@ function EsconderCabeceraScroll() {
 }
 
 function EsconderBarraNavegacion() {
-	// PARA ESCONDER LA BARRA DE NAVEGACIÓN
-	const bsCollapse = new bootstrap.Collapse($('#navbarSupportedContent'))
-	$$('.nav-item').forEach((l) => {
-		l.addEventListener('click', () => { bsCollapse.toggle() })
-	});
-	// PARA ESCONDER LA BARRA DE NAVEGACIÓN
+	// PARA ESCONDER LA BARRA DE NAVEGACIÓN AL CLICAR ELEMENTOS
+	$$('.nav-link').forEach((l) => { l.addEventListener('click', () => { new bootstrap.Collapse($('#navbarSupportedContent')).toggle(); }) });
+	// PARA ESCONDER LA BARRA DE NAVEGACIÓN AL CLICAR ELEMENTOS
 }
