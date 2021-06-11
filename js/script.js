@@ -40,15 +40,13 @@ function Inicializar() {
 	.then(function(data) {
 		scripts = document.body.innerHTML;
 		document.body.innerHTML = data + scripts;
-		
-		btActivo();
-
 		$$('.nav-link').forEach(bt => { bt.addEventListener("click", function() { ClickEnBotonera(bt); } ); });
 		$('#logoEmpresa').addEventListener("click", function(){ ClickEnBotonera($('#menuDia')); });
 		$('#tituloCantinAPP').addEventListener("click", function(){ ClickEnBotonera($('#menuDia')); });
 		CargaMenuDia();
 		EsconderCabeceraScroll();
 		EsconderBarraNavegacion();
+		btActivo();
 	})
 	.catch(function(err) { console.log(err); });
 }
@@ -56,11 +54,9 @@ function Inicializar() {
 function btActivo()
 {
 	$$('.nav-link').forEach(bt => {
-		
-			var current = document.getElementsByClassName("active");
-			if (current.length != 0) { current[0].className = current[0].className.replace(" active", ""); }
-			$$('.nav-link').forEach(bt => { bt.style = ""; });
-
+		var current = document.getElementsByClassName("active");
+		if (current.length != 0) { current[0].className = current[0].className.replace(" active", ""); }
+		$$('.nav-link').forEach(bt => { bt.style = ""; });
 	});
 	
 	$('#menuDia').className += " active";
