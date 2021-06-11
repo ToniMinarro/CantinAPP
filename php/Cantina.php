@@ -112,7 +112,10 @@ if(isset($_POST['miPedido']))
 				<?php } ?>
 							<tr>
 								<td class='text-center'>IMPORTE TOTAL</td>
-								<td class='text-center'><button type="button" class="btn btn-primary btpedido" id="btModificarPedido" data-pedido="<?php print $ped['IdPedido'] ?>">Modificar</button></td>
+								<td class='text-center'>
+									<button type="button" class="btn btn-primary btpedido" id="btModificarPedido" data-pedido="<?php print $ped['IdPedido'] ?>">Modificar</button>
+									<button type="button" id="BtEliminar" class="btn btn-danger BtEliminar" data-pedido="<?php print $ped['IdPedido'] ?>">Eliminar</button>
+								</td>
 								<td class='text-center'><?php print $importePedido ?> €</td>
 							</tr>
 						</tbody>
@@ -283,69 +286,7 @@ if(isset($_POST['activeOrders']) || isset($_POST['pagarPedido']) || isset($_POST
 		Pedido::EliminarPedido($pedEliminar);
 	}
 
-	$pedidosActivos = Pedido::pedidosActivos();
-	if(!empty($pedidosActivos))
-	{
-		$html =  '<div class="row">';
-		$html .= '	<div class="col-md-12">';
-		$html .= '		<h2 class="text-center">Servicios pendientes</h2>';
-		$html .= '	</div>';
-		$html .= '</div>';
-		
-		foreach ($pedidosActivos as $ped)
-		{
-			$importePedido = 0;
-			$html .= '<table class="table table-striped table-hover table-bordered my-5">';
-			$html .= '<thead class="text-center">';
-			$html .= '<tr>';
-			$html .= '		<th colspan="3"><h6>Pedido número '.date('Y') . '/' .$ped['IdPedido']. '</h6><h6>Servir en ' .$ped['FechaServicio']. ' - Cliente: '.$ped['Cliente'].' ['.$ped['IdEmpleado'].']</h6></th>';
-			$html .= '</tr>';
-			$html .= '</thead>';
-
-			$html .= '<tbody>';
-			$detallePedido = Pedido::cargaDetallePedidos($ped['IdPedido']);
-
-			foreach ($detallePedido as $lped)
-			{
-				$importePedido += $lped['Precio'];
-				$html .= "<tr style='cursor: pointer;'>";
-					$html .= "<td>";
-						$html .= $lped['Nombre'];
-					$html .= "</td>";
-					
-					$html .= "<td class='text-center'>";
-						$html .= $lped['Descripcion'];
-					$html .= "</td>";
-
-					$html .= "<td class='text-center'>";
-						$html .= ($lped['Precio']+0) . '€';
-					$html .= "</td>";	
-				$html .= "</tr>";
-			}
-
-			$html .= "<tr>";
-					$html .= "<td class='text-center'>";
-						$html .= 'IMPORTE TOTAL';
-					$html .= "</td>";
-					$html .= "<td class='text-center'>";
-						$html .= '<button type="button" id="BtPagar" class="btn btn-success BtPagar" data-pedido="'.$ped['IdPedido'].'">Pagar</button>';
-						$html .= '<button type="button" id="BtEliminar" class="btn btn-danger BtEliminar" data-pedido="'.$ped['IdPedido'].'">Eliminar</button>';
-					$html .= "</td>";
-					$html .= "<td class='text-center'>";
-						$html .= $importePedido . '€';
-					$html .= "</td>";
-				$html .= "</tr>";
-			
-			$html .= '</tbody>';
-			$html .= '</table>';
-		}
-	}
-	else
-	{
-		$html = '<div class="jumbotron text-center"><h1>¡No hay más servicios pendientes!</h1></div>';
-	}
-	
-	print $html;
+	if(!isset($_POST['eliminaMiPedido'])) { print CargaPedidosPendientes(); }
 }
 
 if(isset($_POST['cashSummary']) && $_POST['cashSummary'])
@@ -600,6 +541,74 @@ if(isset($_POST['PedModificar']) && isset($_POST['idComposicion']) && isset($_PO
 		return print json_encode($result);
 	}
 	else return print 'FALLO';
+}
+
+function CargaPedidosPendientes()
+{
+	$html = '';
+	$pedidosActivos = Pedido::pedidosActivos();
+	if(!empty($pedidosActivos))
+	{
+		$html .=  '<div class="row">';
+		$html .= '	<div class="col-md-12">';
+		$html .= '		<h2 class="text-center">Servicios pendientes</h2>';
+		$html .= '	</div>';
+		$html .= '</div>';
+		
+		foreach ($pedidosActivos as $ped)
+		{
+			$importePedido = 0;
+			$html .= '<table class="table table-striped table-hover table-bordered my-5">';
+			$html .= '<thead class="text-center">';
+			$html .= '<tr>';
+			$html .= '		<th colspan="3"><h6>Pedido número '.date('Y') . '/' .$ped['IdPedido']. '</h6><h6>Servir en ' .$ped['FechaServicio']. ' - Cliente: '.$ped['Cliente'].' ['.$ped['IdEmpleado'].']</h6></th>';
+			$html .= '</tr>';
+			$html .= '</thead>';
+
+			$html .= '<tbody>';
+			$detallePedido = Pedido::cargaDetallePedidos($ped['IdPedido']);
+
+			foreach ($detallePedido as $lped)
+			{
+				$importePedido += $lped['Precio'];
+				$html .= "<tr style='cursor: pointer;'>";
+					$html .= "<td>";
+						$html .= $lped['Nombre'];
+					$html .= "</td>";
+					
+					$html .= "<td class='text-center'>";
+						$html .= $lped['Descripcion'];
+					$html .= "</td>";
+
+					$html .= "<td class='text-center'>";
+						$html .= ($lped['Precio']+0) . '€';
+					$html .= "</td>";	
+				$html .= "</tr>";
+			}
+
+			$html .= "<tr>";
+					$html .= "<td class='text-center'>";
+						$html .= 'IMPORTE TOTAL';
+					$html .= "</td>";
+					$html .= "<td class='text-center'>";
+						$html .= '<button type="button" id="BtPagar" class="btn btn-success BtPagar mx-1" data-pedido="'.$ped['IdPedido'].'">Pagar</button>';
+						$html .= '<button type="button" id="BtEliminar" class="btn btn-danger BtEliminar mx-1" data-pedido="'.$ped['IdPedido'].'">Eliminar</button>';
+					$html .= "</td>";
+					$html .= "<td class='text-center'>";
+						$html .= $importePedido . '€';
+					$html .= "</td>";
+				$html .= "</tr>";
+			
+			$html .= '</tbody>';
+			$html .= '</table>';
+		}
+	}
+	else
+	{
+		$html = '<div class="jumbotron text-center"><h1>¡No hay más servicios pendientes!</h1></div>';
+	}
+
+	return $html;
 }
 
 function CreaTablaNuevoMenu()

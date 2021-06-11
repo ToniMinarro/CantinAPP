@@ -121,6 +121,7 @@ function AgregarEventos(bt) {
 				case 'Mis pedidos activos':
 					$$('.btpedido').forEach(x => { x.addEventListener("click", e => { ClickEnBotonera(bt, null, x.dataset["pedido"], false); }); });
 					$('#btNuevoPedido').addEventListener("click", e => { ClickEnBotonera(bt, null, null, true); });
+					$$('#BtEliminar').forEach(e => e.addEventListener("click", function(){ EliminarPedido(e.dataset["pedido"], true); }));
 					break;
 
 				case 'Modificar pedido':
@@ -494,18 +495,20 @@ function MarcarPagado(IdPedido) {
 	.catch(function(err) { console.log(err); });	
 }
 
-function EliminarPedido(IdPedido) {
-	fetch(CANTINA, { method: 'POST', body: new URLSearchParams("eliminarPedido=" + IdPedido) })
-	.then(function(response) {
-		if(response.ok) { return response.text() }
-		else { throw "Error en la llamada Ajax"; }
-	})
-	.then(function(data) {
-		$('#capaContenido').innerHTML = data;
-		$$('#BtPagar').forEach(e => e.addEventListener("click", function(){ MarcarPagado(e.dataset["pedido"]); }));
-		$$('#BtEliminar').forEach(e => e.addEventListener("click", function(){ EliminarPedido(e.dataset["pedido"]); }));
-	})
-	.catch(function(err) { console.log(err); });	
+function EliminarPedido(IdPedido, miPedido = null) {
+	
+		fetch(CANTINA, { method: 'POST', body: new URLSearchParams("eliminarPedido=" + IdPedido + (miPedido != null && miPedido ? '&eliminaMiPedido=true' : '')) })
+		.then(function(response) {
+			if(response.ok) { return response.text() }
+			else { throw "Error en la llamada Ajax"; }
+		})
+		.then(function(data) {
+			$('#capaContenido').innerHTML = data;
+			if (miPedido != null && miPedido) { ClickEnBotonera($('#miPedido')); }
+			$$('#BtPagar').forEach(e => e.addEventListener("click", function(){ MarcarPagado(e.dataset["pedido"]); }));
+			$$('#BtEliminar').forEach(e => e.addEventListener("click", function(){ EliminarPedido(e.dataset["pedido"]); }));
+		})
+		.catch(function(err) { console.log(err); });
 }
 
 function RecalculaPrecioPedido(nombreLista) {
