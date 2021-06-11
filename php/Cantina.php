@@ -270,7 +270,7 @@ if(isset($_POST['newMenu']))
 					</div>
 				</div>
 				<div class="text-center">
-					<button type="button" class="btn btn-primary mt-3" id="btAgregaMenu">Añadir menú</button>
+					<button type="button" class="btn btn-primary my-5" id="btAgregaMenu">Añadir menú</button>
 				</div>
 			</form>
 		</div>
