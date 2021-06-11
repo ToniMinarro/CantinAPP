@@ -1,7 +1,7 @@
 -- --------------------------------------------------------
--- Host:                         rpi
--- Versión del servidor:         10.3.27-MariaDB-0+deb10u1 - Raspbian 10
--- SO del servidor:              debian-linux-gnueabihf
+-- Host:                         127.0.0.1
+-- Versión del servidor:         10.4.19-MariaDB - mariadb.org binary distribution
+-- SO del servidor:              Win64
 -- HeidiSQL Versión:             11.2.0.6213
 -- --------------------------------------------------------
 
@@ -16,25 +16,24 @@ DROP USER IF EXISTS 'CantinAPP'@'%';
 CREATE USER 'CantinAPP'@'%' IDENTIFIED BY 'xuWoG325WA7i';
 DROP DATABASE IF EXISTS CantinAPP;
 
--- Volcando estructura de base de datos para CantinAPP
-CREATE DATABASE IF NOT EXISTS `CantinAPP` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+-- Volcando estructura de base de datos para cantinapp
+CREATE DATABASE IF NOT EXISTS `cantinapp` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+USE `cantinapp`;
 
-USE `CantinAPP`;
-
--- Volcando estructura para tabla Cantina.Composicion
-CREATE TABLE IF NOT EXISTS `Composicion` (
+-- Volcando estructura para tabla cantinapp.composicion
+CREATE TABLE IF NOT EXISTS `composicion` (
   `IdComposicion` int(11) NOT NULL AUTO_INCREMENT,
   `Nombre` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `Descripcion` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `IdDetalleComposicion` int(11) NOT NULL,
   PRIMARY KEY (`IdComposicion`),
   KEY `FK_IdDetalleComposicion` (`IdDetalleComposicion`),
-  CONSTRAINT `FK_IdDetalleComposicion` FOREIGN KEY (`IdDetalleComposicion`) REFERENCES `DetalleComposicion` (`IdDetalleComposicion`) ON UPDATE CASCADE
+  CONSTRAINT `FK_IdDetalleComposicion` FOREIGN KEY (`IdDetalleComposicion`) REFERENCES `detallecomposicion` (`IdDetalleComposicion`) ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=85 DEFAULT CHARSET=utf8;
 
--- Volcando datos para la tabla Cantina.Composicion: ~78 rows (aproximadamente)
-/*!40000 ALTER TABLE `Composicion` DISABLE KEYS */;
-INSERT INTO `Composicion` (`IdComposicion`, `Nombre`, `Descripcion`, `IdDetalleComposicion`) VALUES
+-- Volcando datos para la tabla cantinapp.composicion: ~79 rows (aproximadamente)
+/*!40000 ALTER TABLE `composicion` DISABLE KEYS */;
+INSERT INTO `composicion` (`IdComposicion`, `Nombre`, `Descripcion`, `IdDetalleComposicion`) VALUES
 	(1, 'Paella de magra y costillejas', '', 1),
 	(2, 'Pastel argentino', '', 1),
 	(3, 'Ensalada de garbanzos', '', 1),
@@ -111,43 +110,41 @@ INSERT INTO `Composicion` (`IdComposicion`, `Nombre`, `Descripcion`, `IdDetalleC
 	(74, 'Revuelto de verduras y bacon', '', 1),
 	(75, 'San Jacobo de York y queso', '', 1),
 	(76, 'Tarta del abuelo', '', 2),
-	(77, 'Bolitas de patatas rellenas de carne con salsa pic', '', 1),
-	(83, 'Tortelili lol', '', 1),
-	(84, 'PRUEBA 5', 'PRUEBA 5', 2);
-/*!40000 ALTER TABLE `Composicion` ENABLE KEYS */;
+	(77, 'Bolitas de patatas rellenas de carne con salsa pic', '', 1);
+/*!40000 ALTER TABLE `composicion` ENABLE KEYS */;
 
--- Volcando estructura para tabla Cantina.DetalleComposicion
-CREATE TABLE IF NOT EXISTS `DetalleComposicion` (
+-- Volcando estructura para tabla cantinapp.detallecomposicion
+CREATE TABLE IF NOT EXISTS `detallecomposicion` (
   `IdDetalleComposicion` int(11) NOT NULL AUTO_INCREMENT,
   `Descripcion` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL DEFAULT '0',
   `Precio` decimal(4,2) NOT NULL DEFAULT 0.00,
   PRIMARY KEY (`IdDetalleComposicion`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
--- Volcando datos para la tabla Cantina.DetalleComposicion: ~4 rows (aproximadamente)
-/*!40000 ALTER TABLE `DetalleComposicion` DISABLE KEYS */;
-INSERT INTO `DetalleComposicion` (`IdDetalleComposicion`, `Descripcion`, `Precio`) VALUES
+-- Volcando datos para la tabla cantinapp.detallecomposicion: ~4 rows (aproximadamente)
+/*!40000 ALTER TABLE `detallecomposicion` DISABLE KEYS */;
+INSERT INTO `detallecomposicion` (`IdDetalleComposicion`, `Descripcion`, `Precio`) VALUES
 	(1, 'Plato', 3.00),
 	(2, 'Postre', 1.50),
 	(3, 'Bebida', 1.00),
 	(4, 'Complemento', 1.00);
-/*!40000 ALTER TABLE `DetalleComposicion` ENABLE KEYS */;
+/*!40000 ALTER TABLE `detallecomposicion` ENABLE KEYS */;
 
--- Volcando estructura para tabla Cantina.DetallePedido
-CREATE TABLE IF NOT EXISTS `DetallePedido` (
+-- Volcando estructura para tabla cantinapp.detallepedido
+CREATE TABLE IF NOT EXISTS `detallepedido` (
   `IdDetallePedido` int(11) NOT NULL AUTO_INCREMENT,
   `IdPedido` int(11) NOT NULL DEFAULT 0,
   `IdComposicion` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`IdDetallePedido`) USING BTREE,
   KEY `FK_ComposicionPedido` (`IdComposicion`),
   KEY `FK_detallepedido_pedido` (`IdPedido`),
-  CONSTRAINT `FK_ComposicionPedido` FOREIGN KEY (`IdComposicion`) REFERENCES `Composicion` (`IdComposicion`) ON UPDATE CASCADE,
-  CONSTRAINT `FK_detallepedido_pedido` FOREIGN KEY (`IdPedido`) REFERENCES `Pedido` (`IdPedido`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `FK_ComposicionPedido` FOREIGN KEY (`IdComposicion`) REFERENCES `composicion` (`IdComposicion`) ON UPDATE CASCADE,
+  CONSTRAINT `FK_detallepedido_pedido` FOREIGN KEY (`IdPedido`) REFERENCES `pedido` (`IdPedido`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=2222 DEFAULT CHARSET=utf8;
 
--- Volcando datos para la tabla Cantina.DetallePedido: ~1.241 rows (aproximadamente)
-/*!40000 ALTER TABLE `DetallePedido` DISABLE KEYS */;
-INSERT INTO `DetallePedido` (`IdDetallePedido`, `IdPedido`, `IdComposicion`) VALUES
+-- Volcando datos para la tabla cantinapp.detallepedido: ~1.267 rows (aproximadamente)
+/*!40000 ALTER TABLE `detallepedido` DISABLE KEYS */;
+INSERT INTO `detallepedido` (`IdDetallePedido`, `IdPedido`, `IdComposicion`) VALUES
 	(1, 18, 2),
 	(2, 18, 3),
 	(3, 18, 4),
@@ -1415,21 +1412,21 @@ INSERT INTO `DetallePedido` (`IdDetallePedido`, `IdPedido`, `IdComposicion`) VAL
 	(2217, 574, 41),
 	(2220, 575, 59),
 	(2221, 575, 15);
-/*!40000 ALTER TABLE `DetallePedido` ENABLE KEYS */;
+/*!40000 ALTER TABLE `detallepedido` ENABLE KEYS */;
 
--- Volcando estructura para tabla Cantina.Menu
-CREATE TABLE IF NOT EXISTS `Menu` (
+-- Volcando estructura para tabla cantinapp.menu
+CREATE TABLE IF NOT EXISTS `menu` (
   `IdMenu` int(11) NOT NULL AUTO_INCREMENT,
   `Fecha` date NOT NULL,
   `IdComposicion` int(11) NOT NULL,
   PRIMARY KEY (`IdMenu`),
   KEY `FK_IdComposicion` (`IdComposicion`),
-  CONSTRAINT `FK_IdComposicion` FOREIGN KEY (`IdComposicion`) REFERENCES `Composicion` (`IdComposicion`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=172 DEFAULT CHARSET=utf8;
+  CONSTRAINT `FK_IdComposicion` FOREIGN KEY (`IdComposicion`) REFERENCES `composicion` (`IdComposicion`) ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=178 DEFAULT CHARSET=utf8;
 
--- Volcando datos para la tabla Cantina.Menu: ~126 rows (aproximadamente)
-/*!40000 ALTER TABLE `Menu` DISABLE KEYS */;
-INSERT INTO `Menu` (`IdMenu`, `Fecha`, `IdComposicion`) VALUES
+-- Volcando datos para la tabla cantinapp.menu: ~132 rows (aproximadamente)
+/*!40000 ALTER TABLE `menu` DISABLE KEYS */;
+INSERT INTO `menu` (`IdMenu`, `Fecha`, `IdComposicion`) VALUES
 	(1, '2021-05-17', 1),
 	(2, '2021-05-17', 2),
 	(3, '2021-05-17', 3),
@@ -1556,16 +1553,16 @@ INSERT INTO `Menu` (`IdMenu`, `Fecha`, `IdComposicion`) VALUES
 	(157, '2021-06-10', 26),
 	(158, '2021-06-10', 15),
 	(159, '2021-06-10', 11),
-	(166, '2021-09-06', 10),
-	(167, '2021-09-06', 43),
-	(168, '2021-09-06', 9),
-	(169, '2021-09-06', 39),
-	(170, '2021-09-06', 13),
-	(171, '2021-09-06', 15);
-/*!40000 ALTER TABLE `Menu` ENABLE KEYS */;
+	(172, '2021-06-15', 50),
+	(173, '2021-06-15', 9),
+	(174, '2021-06-15', 53),
+	(175, '2021-06-15', 19),
+	(176, '2021-06-15', 14),
+	(177, '2021-06-15', 12);
+/*!40000 ALTER TABLE `menu` ENABLE KEYS */;
 
--- Volcando estructura para tabla Cantina.Pedido
-CREATE TABLE IF NOT EXISTS `Pedido` (
+-- Volcando estructura para tabla cantinapp.pedido
+CREATE TABLE IF NOT EXISTS `pedido` (
   `IdPedido` int(11) NOT NULL AUTO_INCREMENT,
   `FechaServicio` datetime NOT NULL,
   `Servido` bit(1) NOT NULL,
@@ -1573,9 +1570,9 @@ CREATE TABLE IF NOT EXISTS `Pedido` (
   PRIMARY KEY (`IdPedido`)
 ) ENGINE=InnoDB AUTO_INCREMENT=576 DEFAULT CHARSET=utf8;
 
--- Volcando datos para la tabla Cantina.Pedido: ~535 rows (aproximadamente)
-/*!40000 ALTER TABLE `Pedido` DISABLE KEYS */;
-INSERT INTO `Pedido` (`IdPedido`, `FechaServicio`, `Servido`, `IdEmpleado`) VALUES
+-- Volcando datos para la tabla cantinapp.pedido: ~546 rows (aproximadamente)
+/*!40000 ALTER TABLE `pedido` DISABLE KEYS */;
+INSERT INTO `pedido` (`IdPedido`, `FechaServicio`, `Servido`, `IdEmpleado`) VALUES
 	(18, '2021-04-04 14:00:00', b'1', 446),
 	(19, '2021-04-04 14:00:00', b'1', 446),
 	(20, '2021-04-04 14:00:00', b'1', 446),
@@ -2122,10 +2119,10 @@ INSERT INTO `Pedido` (`IdPedido`, `FechaServicio`, `Servido`, `IdEmpleado`) VALU
 	(573, '2021-06-09 20:29:58', b'1', 12),
 	(574, '2021-06-09 20:38:11', b'1', 10),
 	(575, '2021-06-10 15:00:00', b'1', 3);
-/*!40000 ALTER TABLE `Pedido` ENABLE KEYS */;
+/*!40000 ALTER TABLE `pedido` ENABLE KEYS */;
 
--- Volcando estructura para tabla Cantina.Usuario
-CREATE TABLE IF NOT EXISTS `Usuario` (
+-- Volcando estructura para tabla cantinapp.usuario
+CREATE TABLE IF NOT EXISTS `usuario` (
   `IdUsuario` int(11) NOT NULL AUTO_INCREMENT,
   `Nombre` varchar(50) NOT NULL,
   `Email` varchar(50) NOT NULL,
@@ -2133,24 +2130,24 @@ CREATE TABLE IF NOT EXISTS `Usuario` (
   PRIMARY KEY (`IdUsuario`),
   UNIQUE KEY `Email` (`Email`),
   UNIQUE KEY `Nick` (`Nombre`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla Cantina.Usuario: ~8 rows (aproximadamente)
-/*!40000 ALTER TABLE `Usuario` DISABLE KEYS */;
-INSERT INTO `Usuario` (`IdUsuario`, `Nombre`, `Email`, `Hash`) VALUES
-	(1, 'Admin', 'admin@CantinAPP.com', '$2y$10$8.qTKhu0QH9Tdugs2IxU9uZCaFm0gbSJILJ73v1m8usYEOW4fPVrG'),
+-- Volcando datos para la tabla cantinapp.usuario: ~12 rows (aproximadamente)
+/*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
+INSERT INTO `usuario` (`IdUsuario`, `Nombre`, `Email`, `Hash`) VALUES
+	(1, 'Admin', 'admin@CantinAPP.com', '$2y$10$lXP6ADAGeiz9zLorZYIjC.7oSFxrAv5IqP1Hl4JxOViYPtGP1rD4W'),
 	(2, 'Alicia', 'alicia.b.m94@hotmail.com', '$2y$10$TYMUHWp2KGBfJbL7LVJOAOp3axHLzc/jJcx.NwEzhCpd1.6RU1pam'),
 	(3, 'Toni', 'antonio_jose91@hotmail.es', '$2y$10$IZ5gO0WmBmpRSJvjPsiHFuIHk9OedJkCHlGCj3ym7pXZVEFP.ZY4S'),
 	(4, 'Prueba', '1@2.com', '$2y$10$CO.8Ve41yY6AhSMNuihR2OXg8p3ECR6MQrvXaFOWH0ggg.SYbYOZa'),
 	(5, 'Chloe', 'chloe-12@hotmail.com', '$2y$10$iPi1B6YvGhuEbNHI8Q3EReFVlgyrwIEeFU8p/nGqimpReOYBNUPAe'),
 	(6, 'pepa', 'pepam@hotmail.com', '$2y$10$8KpxuO3kRXPyBc1gBy79HO0CEKgXLWcy47zaHt65vVPy834NJgXry'),
-	(7, 'Cacaculopedopis', 'juju@gmail.com', '$2y$10$RCXgH4/bN7ME67JuuYieGOTJAuZmjSY0Dt75u6SzZwzSkR2WvMYnK'),
+	(7, 'Jose', 'jose933_test22@gmail.com', '$2y$10$RCXgH4/bN7ME67JuuYieGOTJAuZmjSY0Dt75u6SzZwzSkR2WvMYnK'),
 	(8, 'Raul', 'garca.raul@gmail.com', '$2y$10$H9dqAWSvt8qYSmMooV3gruKUJQMp/Ycs4ozczmNinU68IDuELsCvm'),
 	(9, 'ALG', 'andres.lorentegonzalezz@gmail.com', '$2y$10$bnGZEI5Tr4hAfAP5lvmYLODnotEt.cI2RDQoeyUjgPgNRQ/WcOW/C'),
 	(10, 'Lidia', 'lidiaminarrofp@gmail.com', '$2y$10$rzcys71E1txYr4wC6nPkU.Rptyfk0TzjdlgqK3zK0bTqiYn4PsZUa'),
 	(11, 'Guillermina', 'guilerminna@hotmail.com', '$2y$10$25LsWRDBM5JN0RfQd9zl1OOYzdX6dBiNN.JmfKKelnPgJ4GLwc/Ga'),
 	(12, 'Fran', 'franciscoburlomolina@gmail.com', '$2y$10$Aw7VMhtQA88NQSzuRmcF.eKEbjY7qJAC593cnX0fmelH3NccwDUse');
-/*!40000 ALTER TABLE `Usuario` ENABLE KEYS */;
+/*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
