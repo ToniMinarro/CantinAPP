@@ -113,10 +113,16 @@ if(isset($_POST['miPedido']))
 							<tr>
 								<td class='text-center'>IMPORTE TOTAL</td>
 								<td class='text-center'>
-									<button type="button" class="btn btn-primary btpedido" id="btModificarPedido" data-pedido="<?php print $ped['IdPedido'] ?>">Modificar</button>
-									<button type="button" id="BtEliminar" class="btn btn-danger BtEliminar" data-pedido="<?php print $ped['IdPedido'] ?>">Eliminar</button>
 								</td>
 								<td class='text-center'><?php print $importePedido ?> €</td>
+							</tr>
+
+							<tr>
+							<td class='text-center' colspan="3">
+									<button type="button" class="btn btn-primary btpedido mx-1 my-1" id="btModificarPedido" data-pedido="<?php print $ped['IdPedido'] ?>">Modificar</button>
+									<button type="button" id="BtEliminar" class="btn btn-danger BtEliminar mx-1 my-1" data-pedido="<?php print $ped['IdPedido'] ?>">Eliminar</button>
+								</td>
+
 							</tr>
 						</tbody>
 					</table>
@@ -561,7 +567,7 @@ function CargaPedidosPendientes()
 			$html .= '<table class="table table-striped table-hover table-bordered my-5">';
 			$html .= '<thead class="text-center">';
 			$html .= '<tr>';
-			$html .= '		<th colspan="3"><h6>Pedido número '.date('Y') . '/' .$ped['IdPedido']. '</h6><h6>Servir en ' .$ped['FechaServicio']. ' - Cliente: '.$ped['Cliente'].' ['.$ped['IdEmpleado'].']</h6></th>';
+			$html .= '		<th colspan="3"><h6>Pedido número '.date('Y') . '/' .$ped['IdPedido']. '</h6><h6>Servir en ' .$ped['FechaServicio']. ' - Cliente: '.$ped['Cliente'].'</h6></th>';
 			$html .= '</tr>';
 			$html .= '</thead>';
 
@@ -590,15 +596,22 @@ function CargaPedidosPendientes()
 					$html .= "<td class='text-center'>";
 						$html .= 'IMPORTE TOTAL';
 					$html .= "</td>";
+
 					$html .= "<td class='text-center'>";
-						$html .= '<button type="button" id="BtPagar" class="btn btn-success BtPagar mx-1" data-pedido="'.$ped['IdPedido'].'">Pagar</button>';
-						$html .= '<button type="button" id="BtEliminar" class="btn btn-danger BtEliminar mx-1" data-pedido="'.$ped['IdPedido'].'">Eliminar</button>';
 					$html .= "</td>";
+					
 					$html .= "<td class='text-center'>";
 						$html .= $importePedido . '€';
 					$html .= "</td>";
 				$html .= "</tr>";
-			
+				
+				$html .= "<tr>";
+					$html .= "<td class='text-center' colspan='3'>";
+						$html .= '<button type="button" id="BtPagar" class="btn btn-success BtPagar mx-1 my-1" data-pedido="'.$ped['IdPedido'].'">Pagar</button>';
+						$html .= '<button type="button" id="BtEliminar" class="btn btn-danger BtEliminar mx-1 my-1" data-pedido="'.$ped['IdPedido'].'">Eliminar</button>';
+					$html .= "</td>";
+				$html .= "</tr>";
+
 			$html .= '</tbody>';
 			$html .= '</table>';
 		}
