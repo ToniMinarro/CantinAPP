@@ -23,30 +23,44 @@ Además de esto, y como filosofía personal, adoptada en base al desarrollo en d
 
 En este sentido, resulta muy sencillo instanciar una clase, pasarle la información que requiere para su construcción, y hacer la misma persistente empleando el mínimo esfuerzo.
 
+
 INSTRUCCIONES DE DESPLIEGUE
 
-1º Instalar servidor web (WAMP, LAMP, etc.)
+INSTALAR SERVIDOR WEB PHP (LAMP O WAMP)
 
-2º Instalar git o descargar
-https://github.com/ToniMinarro/CantinAPP.git y copiar en la ruta de documentos del servidor como /RAIZ/CantinAPP
 
-3º Clonar repositorio en ruta de documentos del servidor web
-	cd C:\xampp\htdocs
-	git clone https://github.com/ToniMinarro/CantinAPP.git CantinAPP
+1.	Instalar servidor web (WAMP, LAMP, etc.). Yo he usado XAMPP en Windows y un entorno LAMP en Ubuntu para las pruebas.  -> Enlace a XAMPP
 
-4º Conectar a BBDD en localhost con los siguientes valores (valores por defecto de la instalación:
-HOST: localhost
-PORT: 3306
-USER: root
-PASS: (vacía)
-BBDD: (vacía)
 
-5º Importar archivo SQL en la BBDD
-(WINDOWS)
-mysql -p -u root < C:\xampp\htdocs\CantinAPP\bbdd\CantinAPP.sql
+CLONAR REPOSITORIO - VARIANTE INSTALANDO GIT
 
-(LINUX)
-mysql -u root -p mysql < /var/www/html/CantinAPP/bbdd/CantinAPP.sql
 
-6º Iniciar
-	http://localhost/CantinAPP/
+2.	Instalar Git - > Enlace a GIT
+
+3.	Clonar repositorio (copiar y pegar comandos)
+
+cd C:\xampp\htdocs (ruta de documentos del servidor web XAMPP Windows)
+cd /var/www/html (ruta de documentos del servidor web LAMP Ubuntu)
+git clone https://github.com/ToniMinarro/CantinAPP.git CantinAPP
+
+
+CLONAR REPOSITORIO - VARIANTE SIN INSTALAR GIT
+
+2.	Descargar proyecto de GitHub en -> Enlace a repositorio CantinAPP 
+
+3.	Copiar en la ruta de documentos del servidor como /RAIZ/CantinAPP
+En Windows C:\xampp\htdocs\CantinAPP
+En Ubuntu /var/www/html/CantinAPP
+
+IMPORTAR BBDD Y LANZAR
+
+4.	Importar la BBDD (Enter password: Password vacía por defecto)
+(PARA WINDOWS)
+C:\xampp\mysql\bin\mysql -p -u root < C:\xampp\htdocs\CantinAPP\bbdd\CantinAPP.sql
+
+(PARA LINUX)
+sudo mysql -p -u root < /var/www/html/CantinAPP/bbdd/CantinAPP.sql
+
+5.	Iniciar -> Iniciar aplicación CantinAPP
+USUARIO: Admin
+PASSWORD: CantinAPP
