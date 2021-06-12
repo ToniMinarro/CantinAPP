@@ -60,16 +60,15 @@ IMPORTAR BBDD Y LANZAR
 
 4.	Importar la BBDD (Enter password: Password vacía por defecto)
 
-(PARA WINDOWS)
-
-C:\xampp\mysql\bin\mysql -p -u root < C:\xampp\htdocs\CantinAPP\bbdd\CantinAPP.sql
+(PARA WINDOWS) C:\xampp\mysql\bin\mysql -p -u root < C:\xampp\htdocs\CantinAPP\bbdd\CantinAPP.sql
 
 
-(PARA LINUX)
-
-sudo mysql -p -u root < /var/www/html/CantinAPP/bbdd/CantinAPP.sql
+(PARA LINUX) sudo mysql -p -u root < /var/www/html/CantinAPP/bbdd/CantinAPP.sql
 
 5.	Iniciar -> Iniciar aplicación CantinAPP
+
+
+
 
 USUARIO: Admin
 
