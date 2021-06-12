@@ -40,7 +40,9 @@ CLONAR REPOSITORIO - VARIANTE INSTALANDO GIT
 3.	Clonar repositorio (copiar y pegar comandos)
 
 cd C:\xampp\htdocs (ruta de documentos del servidor web XAMPP Windows)
+
 cd /var/www/html (ruta de documentos del servidor web LAMP Ubuntu)
+
 git clone https://github.com/ToniMinarro/CantinAPP.git CantinAPP
 
 
@@ -49,18 +51,26 @@ CLONAR REPOSITORIO - VARIANTE SIN INSTALAR GIT
 2.	Descargar proyecto de GitHub en -> Enlace a repositorio CantinAPP 
 
 3.	Copiar en la ruta de documentos del servidor como /RAIZ/CantinAPP
+
 En Windows C:\xampp\htdocs\CantinAPP
+
 En Ubuntu /var/www/html/CantinAPP
 
 IMPORTAR BBDD Y LANZAR
 
 4.	Importar la BBDD (Enter password: Password vacía por defecto)
+
 (PARA WINDOWS)
+
 C:\xampp\mysql\bin\mysql -p -u root < C:\xampp\htdocs\CantinAPP\bbdd\CantinAPP.sql
 
+
 (PARA LINUX)
+
 sudo mysql -p -u root < /var/www/html/CantinAPP/bbdd/CantinAPP.sql
 
 5.	Iniciar -> Iniciar aplicación CantinAPP
+
 USUARIO: Admin
+
 PASSWORD: CantinAPP
