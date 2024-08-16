@@ -1,4 +1,3 @@
-version: '3.7'
 services:
   mysql:
     image: mysql/mysql-server:5.7.37
@@ -12,7 +11,7 @@ services:
     ports:
       - "3306:3306"
 
-  legacy-php:
+  php:
     depends_on:
       - mysql
     build:
