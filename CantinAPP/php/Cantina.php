@@ -1,9 +1,5 @@
 <?php require("Funciones.php");
 
-/**
- * @author: Antonio José Miñarro Miñarro (antonio_jose91@hotmail.es)
- */
-
 if(isset($_POST['inicializar']))
 {
 	CargaCabecera();
@@ -95,7 +91,7 @@ if(isset($_POST['miPedido']))
 					<table class="table table-striped table-hover table-bordered my-5">
 						<thead class="text-center">
 							<tr style="cursor: pointer;">
-								<th colspan="3"><h6>Pedido número <?php  print date('Y') . '/' .$ped['IdPedido'] ?></h6><h6>Servir en <?php print $ped['FechaServicio'] ?> - Cliente: <?php print $ped['Cliente'] ?></h6></th>
+								<th colspan="3"><h6>Pedido número <?php  print date('Y') . 'Cantina.php/' .$ped['IdPedido'] ?></h6><h6>Servir en <?php print $ped['FechaServicio'] ?> - Cliente: <?php print $ped['Cliente'] ?></h6></th>
 							</tr>
 						</thead>
 						<tbody>

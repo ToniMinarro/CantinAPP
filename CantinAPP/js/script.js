@@ -58,7 +58,9 @@ function btActivo()
 		if (current.length != 0) { current[0].className = current[0].className.replace(" active", ""); }
 		$$('.nav-link').forEach(bt => { bt.style = ""; });
 	});
-	
+
+	menuDia.className += " active";
+	// alert($('#menuDia').className);
 	$('#menuDia').className += " active";
 	$('#menuDia').style.color = "white";
 

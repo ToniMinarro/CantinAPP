@@ -1,13 +1,9 @@
 ﻿<?php require('Config.php');
-
-/**
- * @author: Antonio José Miñarro Miñarro (antonio_jose91@hotmail.es)
- */
 	function Conn()
 	{
 		global $BBDD_Cantina;
 		$conn = new PDO($BBDD_Cantina['BBDD'], $BBDD_Cantina['Usuario'], $BBDD_Cantina['Password']);
-		$acentos = $conn->query("SET NAMES 'utf8'");
+		$conn->query("SET NAMES 'utf8'");
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		return $conn;
 	}
