@@ -16,10 +16,12 @@ yesterday = yesterday.toISOString().split('T')[0];
 tomorrow = tomorrow.toISOString().split('T')[0];
 
 function FechaAhora() {
-	var dt = new Date().toLocaleDateString().split("/").reverse();
-	dt[1] = dt[1].padStart(2, '0');
-	dt[2] = dt[2].padStart(2, '0');
-	return dt.join("-");
+	var dt = new Date();
+	var year = dt.getFullYear();
+	var month = (dt.getMonth() + 1).toString().padStart(2, '0');
+	var day = dt.getDate().toString().padStart(2, '0');
+
+	return `${year}-${month}-${day}`;
 }
 
 function HoraAhora() {
@@ -58,7 +60,8 @@ function btActivo()
 		if (current.length != 0) { current[0].className = current[0].className.replace(" active", ""); }
 		$$('.nav-link').forEach(bt => { bt.style = ""; });
 	});
-	
+
+	console.log(document.getElementById('menuDia').className);
 	$('#menuDia').className += " active";
 	$('#menuDia').style.color = "white";
 
