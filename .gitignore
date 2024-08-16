@@ -1,3 +1,4 @@
 CantinAPP.code-workspace
 .*
 !/.gitignore
+.idea

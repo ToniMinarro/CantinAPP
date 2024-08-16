@@ -14120,7 +14120,7 @@
 	
 	
 		/**
-		 * Legacy configuration options. Enable and disable legacy options that
+		 * CantinAPP configuration options. Enable and disable legacy options that
 		 * are available in DataTables.
 		 *
 		 *  @type object
@@ -15204,7 +15204,7 @@
 	// Provide access to the host jQuery object (circular reference)
 	DataTable.$ = $;
 
-	// Legacy aliases
+	// CantinAPP aliases
 	$.fn.dataTableSettings = DataTable.settings;
 	$.fn.dataTableExt = DataTable.ext;
 

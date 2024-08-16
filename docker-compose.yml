@@ -1,0 +1,24 @@
+version: '3.7'
+services:
+  mysql:
+    image: mysql/mysql-server:5.7.37
+    environment:
+      MYSQL_DATABASE: CantinAPP
+      MYSQL_USER: cantinapp
+      MYSQL_PASSWORD: cantinapp
+    restart: always
+    volumes:
+      - ./db/init/CantinAPP.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "3306:3306"
+
+  legacy-php:
+    depends_on:
+      - mysql
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    volumes:
+      - .:/var/www/html
+    ports:
+      - "80:80"
