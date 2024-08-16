@@ -59,8 +59,6 @@ function btActivo()
 		$$('.nav-link').forEach(bt => { bt.style = ""; });
 	});
 
-	menuDia.className += " active";
-	// alert($('#menuDia').className);
 	$('#menuDia').className += " active";
 	$('#menuDia').style.color = "white";
 
